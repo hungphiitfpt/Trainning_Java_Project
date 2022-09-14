@@ -34,8 +34,7 @@ public class HomeController {
 //		if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
 //			size = Integer.parseInt(request.getParameter("size"));
 //		}
-		name = request.getParameter("attrNname");
-		System.out.printf("á",name);
+	
 		model.addAttribute("customers", customerRepository.findAll(PageRequest.of(page, size)));
 		return "customers";
 	}
@@ -45,6 +44,7 @@ public class HomeController {
 			  
 		      @RequestParam(name = "page", required = false, defaultValue = "0") int page,
 		      @RequestParam(name = "name", required = false)  String name,  
+		      @RequestParam(name = "address", required = false)  String address, 
 		      @RequestParam(name = "size", required = false, defaultValue = "5") int size,
 		      @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
 
@@ -57,8 +57,29 @@ public class HomeController {
 //		}
 		model.addAttribute(name, "attrNname");
 		System.out.printf("á",name);
-		model.addAttribute("customers", customerRepository.findAllbY(name,PageRequest.of(page, size)));
+		model.addAttribute("customers", customerRepository.findAllbY(name,address,PageRequest.of(page, size)));
 		return "customers";
 	}
+
+	
+//	@GetMapping("/customers")
+//	public Page<Customes> customersPage( Model model,
+//			  
+//		      @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+//		      @RequestParam(name = "name", required = false)  String name,  
+//		      @RequestParam(name = "address", required = false)  String address, 
+//		      @RequestParam(name = "size", required = false, defaultValue = "5") int size,
+//		      @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+//
+////		if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+////			page = Integer.parseInt(request.getParameter("page")) - 1;
+////		}
+////
+////		if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+////			size = Integer.parseInt(request.getParameter("size"));
+////		}
+//	Page<Customes> list = customerRepository.findAllbY(name,address,PageRequest.of(page, size));
+//		return list;
+//	}
 
 }

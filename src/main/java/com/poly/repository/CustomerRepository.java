@@ -19,7 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customes, Long>{
 			+ "AND employee.categoryid LIKE '%1%' ",nativeQuery = true)
 	List<Customes> findAllpro(PageRequest of);
 
-	@Query(value = "SELECT * FROM employee WHERE employee.status <> '1' and employee.name like %:name% ",nativeQuery = true)
-	Page<Customes> findAllbY(@Param("name") String name , PageRequest of);
+	@Query(value = "SELECT * FROM employee WHERE employee.status <> '1' and employee.name like %:name% and employee.address like %:address% ",nativeQuery = true)
+	Page<Customes> findAllbY(@Param("name") String name,@Param("address") String address , PageRequest of);
 
 }
