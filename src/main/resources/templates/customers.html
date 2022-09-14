@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<input type="text" name="attrNname" value="attrNname" />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>status</th>
+            <th>role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.address}"></td>
+                   <td th:text="${customer.status}"></td>
+                          <td th:text="${customer.category.name}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Pagination" th:if="${customers.totalPages gt 0}">
+    <ul class="pagination justify-content-center font-weight-bold">
+    <li class="page-item" th:classappend="${customers.number eq 0} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/customers?page={id}&name=(id=0)}"
+               aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                <span aria-hidden="true">Previous</span>
+            </a>
+        </li>
+        <li class="page-item" th:classappend="${customers.number eq 0} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/customers?page={id}&name=(id=${customers.number - 1})}"
+               aria-label="Prev" title="Prev Page" data-toggle="tooltip">
+                <span aria-hidden="true"><<</span>
+            </a>
+        </li>
+        <li class="page-item" th:classappend="${customers.number + 1 eq customers.totalPages} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/customers?page={id}&name=(id=${customers.number + 1})}"
+               aria-label="Next" title="Next Page" data-toggle="tooltip">
+                <span aria-hidden="true">>></span>
+            </a>
+        </li>
+          <li class="page-item" th:classappend="${customers.number + 1 eq customers.totalPages} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{/customers?page={id}&name=(id=${customers.totalPages - 1})}"
+               aria-label="Next" title="Next Page" data-toggle="tooltip">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>
